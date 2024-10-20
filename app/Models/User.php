@@ -32,13 +32,15 @@ class User extends Authenticatable implements FilamentUser
         'password' => 'hashed',
     ];
 
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return true; // Ajusta esto según tus necesidades de autorización
-    }
-
+  
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+    public function canAccessPanel(Panel $panel): bool
+    {
+        // Por ahora, permitimos que todos los usuarios accedan al panel
+        // Puedes modificar esta lógica según tus necesidades
+        return true;
     }
 }
