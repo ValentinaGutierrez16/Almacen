@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ventas extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'ventas';
 
@@ -19,12 +20,12 @@ class Ventas extends Model
 
     public function cliente()
     {
-        return $this->belongsTo(Clientes::class);
+        return $this->belongsTo(Clientes::class)->withTrashed();
     }
 
     public function producto()
     {
-        return $this->belongsTo(Productos::class);
+        return $this->belongsTo(Productos::class)->withTrashed();
     }
 
     public function realizarVenta()
